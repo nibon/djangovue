@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}app1{% endblock title %}
+
+{% block content %}
+    <div id="app">
+        <app></app>
+    </div>
+{% endblock content %}
+
+{% block vue-js %}
+    <script>
+        var ssr = {appName: 'app1'};
+    </script>
+    {% render_bundle 'chunk-vendors' %}
+    {% render_bundle 'app1' %}
+{% endblock vue-js %}

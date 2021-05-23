@@ -1,0 +1,25 @@
+---
+version: '3'
+
+services:
+  django:
+    build: .
+    hostname: django
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      PYTHONPATH: /code
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+
+  vue:
+    build:
+      context: apps/vue
+      dockerfile: Dockerfile
+    command: yarn --cwd vue serve
+    hostname: vue
+    volumes:
+      - ./apps/vue/src:/code
+    ports:
+      - 8080:8080
